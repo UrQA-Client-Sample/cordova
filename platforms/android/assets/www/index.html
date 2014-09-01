@@ -28,13 +28,18 @@
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
+
+        <div data-role="content">
+            <p>
+                <a onclick="test_sendexception()">hello</a>         
+            </p>
+            <!--
+            <p>
+                <a onclick="add_log()">add log</a>          
+            </p>
+            -->
+        </div><!-- /content -->
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
@@ -47,26 +52,33 @@
 
             app.initialize();
 
+            // Init urqa
+            urqa.Init( { console_debug_enable: true } );
+
+            // test functions
             function ttt(){
                 try{
                     var te = null;
                     te.toString();
                 }catch(err){
 
-                    alert( "send_e" );
+                    console.log( "send_e" );
                     
                     urqa.send_e( err, { errname: "hhh test error", rank : 0,  tag: "cordova" } );    
                 }
             };
             function ttt2(){
 
-                alert( "send_l" );
+                console.log( "send_l" );
 
                 urqa.send_l( "This is Test Msg", { errname: "hhh test error", rank : 1,  tag: "cordova" }  );
             }
 
-            ttt();
-            ttt2();
+            function test_sendexception(){
+                ttt();
+                ttt2();
+                test3();    // uncautch error
+            }
         </script>
     </body>
 </html>
